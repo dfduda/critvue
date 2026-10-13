@@ -1,7 +1,7 @@
 import { getSql } from "../lib/db";
 import ContactForm from "./contact-form";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 const fallbackProjects = [
   { id: 1, title: "Projeto de exemplo", description: "Conecte o banco (DATABASE_URL) e seus projetos aparecem aqui.", url: null, tags: ["Next.js"] },
