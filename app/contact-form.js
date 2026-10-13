@@ -19,14 +19,14 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={onSubmit} className="form">
-      <input name="name" placeholder="Nome" required maxLength={100} />
-      <input name="email" type="email" placeholder="E-mail" required maxLength={200} />
-      <textarea name="message" placeholder="Mensagem" required rows={5} maxLength={2000} />
+      <input name="name" placeholder="Como você se chama?" required maxLength={100} />
+      <input name="email" type="email" placeholder="Seu melhor e-mail" required maxLength={200} />
+      <textarea name="message" placeholder="Conta pra mim o que você tá pensando..." required rows={5} maxLength={2000} />
       <button className="btn" disabled={status === "loading"}>
-        {status === "loading" ? "Enviando..." : "Enviar"}
+        {status === "loading" ? "Enviando..." : "Mandar mensagem 🚀"}
       </button>
-      {status === "ok" && <p className="ok">Mensagem enviada. Obrigado!</p>}
-      {status === "error" && <p className="err">Não foi possível enviar. Tente novamente.</p>}
+      {status === "ok" && <p className="ok">Oba, chegou! Já já eu te respondo 💗</p>}
+      {status === "error" && <p className="err">Ops, deu ruim! Tenta de novo rapidinho?</p>}
     </form>
   );
 }
