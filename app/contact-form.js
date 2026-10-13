@@ -22,10 +22,10 @@ export default function ContactForm() {
       <input name="name" placeholder="Como você se chama?" required maxLength={100} />
       <input name="email" type="email" placeholder="Seu melhor e-mail" required maxLength={200} />
       <textarea name="message" placeholder="Conta pra mim o que você tá pensando..." required rows={5} maxLength={2000} />
-      <button className="btn" disabled={status === "loading"}>
-        {status === "loading" ? "Enviando..." : "Mandar mensagem 🚀"}
+      <button className="send mono" disabled={status === "loading"}>
+        {status === "loading" ? "Enviando..." : "Enviar mensagem →"}
       </button>
-      {status === "ok" && <p className="ok">Oba, chegou! Já já eu te respondo 💗</p>}
+      {status === "ok" && <p className="ok">Oba, chegou! Já já eu te respondo</p>}
       {status === "error" && <p className="err">Ops, deu ruim! Tenta de novo rapidinho?</p>}
     </form>
   );
