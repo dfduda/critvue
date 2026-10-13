@@ -18,9 +18,9 @@ if (count === 0) {
     ["Landing page · Simple Dealers", "Landing page da Simple Dealers, pensada para apresentar a marca e levar o visitante para o contato.", "https://simpledealers.com", ["Landing page", "Web design"]],
     ["Landing page · IKIZY", "Landing page da IKIZY, o sistema de gestão para negócios de beleza: agenda, clientes e financeiro em um só lugar.", "https://ikizy.com", ["Landing page", "Web design"]],
     ["Branding guidelines · Simple Dealers", "Guia de marca da Simple Dealers: logo, cores, tipografia e regras de uso.", null, ["Branding", "Guidelines"]],
-    ["Landing page · Projeto conceito 01", "Projeto fictício, criado para praticar e explorar ideias.", null, ["Landing page", "Conceito"]],
-    ["Landing page · Projeto conceito 02", "Projeto fictício, criado para praticar e explorar ideias.", null, ["Landing page", "Conceito"]],
-    ["Rebranding · Projeto conceito", "Projeto fictício de rebranding, criado para praticar e explorar ideias.", null, ["Rebranding", "Conceito"]],
+    ["Landing page · Café Brisa", "Landing page fictícia para uma cafeteria de bairro. Projeto conceito.", null, ["Landing page", "Conceito"]],
+    ["Landing page · Studio Alma", "Landing page fictícia para um estúdio de bem-estar. Projeto conceito.", null, ["Landing page", "Conceito"]],
+    ["Rebranding · Havaianas", "Estudo de rebranding da Havaianas, feito por conta própria e sem vínculo com a marca.", null, ["Rebranding", "Conceito"]],
   ];
   for (const [i, [title, description, url, tags]] of seed.entries()) {
     await sql`INSERT INTO projects (title, description, url, tags, created_at)
