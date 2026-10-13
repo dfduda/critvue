@@ -1,9 +1,9 @@
 :root {
-  --ink: #0e0d0d;
-  --cream: #ece6dc;
-  --accent: #ff5a36;
-  --lilac: #b8a4ff;
-  --line: rgba(236, 230, 220, 0.28);
+  --ink: #0a0a0a;
+  --cream: #ffffff;
+  --accent: #ff4fa0;
+  --lilac: #2fd8e6;
+  --line: rgba(255, 255, 255, 0.28);
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -51,7 +51,7 @@ h2 { margin: 0 0 40px; font-weight: 500; font-size: clamp(2rem, 6vw, 3.6rem); li
 /* form */
 .form { display: grid; gap: 18px; max-width: 520px; }
 .form input, .form textarea { background: transparent; color: var(--cream); border: 0; border-bottom: 1px solid var(--line); padding: 12px 2px; font: inherit; border-radius: 0; }
-.form input::placeholder, .form textarea::placeholder { color: rgba(236,230,220,.5); }
+.form input::placeholder, .form textarea::placeholder { color: rgba(255,255,255,.5); }
 .form input:focus, .form textarea:focus { outline: 0; border-color: var(--accent); }
 .send { justify-self: start; background: var(--cream); color: var(--ink); border: 0; border-radius: 99px; padding: 14px 24px; cursor: pointer; font-size: .78rem; transition: background .2s; }
 .send:hover { background: var(--accent); }
