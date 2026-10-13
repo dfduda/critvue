@@ -15,7 +15,7 @@ for (const s of statements) await sql.query(s);
 const [{ count }] = await sql`SELECT count(*)::int AS count FROM projects`;
 if (count === 0) {
   const seed = [
-    ["Landing page · Simple Dealers", "Landing page da Simple Dealers, pensada para apresentar a marca e levar o visitante para o contato.", "https://simpledealers.com", ["Landing page", "Web design"]],
+    ["Landing page · Simple Dealers", "Landing page da Simple Dealers, pensada para apresentar a marca e levar o visitante para o contato.", "https://simpledealers.com.br/", ["Landing page", "Web design"]],
     ["Landing page · IKIZY", "Landing page da IKIZY, o sistema de gestão para negócios de beleza: agenda, clientes e financeiro em um só lugar.", "https://ikizy.com", ["Landing page", "Web design"]],
     ["Branding guidelines · Simple Dealers", "Guia de marca da Simple Dealers: logo, cores, tipografia e regras de uso.", null, ["Branding", "Guidelines"]],
     ["Landing page · Café Brisa", "Landing page fictícia para uma cafeteria de bairro. Projeto conceito.", null, ["Landing page", "Conceito"]],
