@@ -1,4 +1,6 @@
 import { getSql } from "../../lib/db";
+import { briefingSections } from "../../lib/briefing.mjs";
+import BriefingsList from "./briefings-list";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Respostas · Briefing", robots: { index: false, follow: false } };
@@ -10,7 +12,8 @@ export default async function Answers({ searchParams }) {
     return <div className="bfx"><div className="bfx-wrap"><p className="bfx-lead">Página restrita.</p></div></div>;
   }
   const sql = getSql();
-  const rows = sql ? await sql`SELECT id, name, contact, answers, created_at FROM briefings ORDER BY created_at DESC LIMIT 500` : [];
+  const data = sql ? await sql`SELECT id, name, contact, answers, created_at FROM briefings ORDER BY created_at DESC LIMIT 500` : [];
+  const rows = data.map((r) => ({ ...r, created_at: new Date(r.created_at).toISOString() }));
 
   return (
     <div className="bfx">
@@ -23,36 +26,9 @@ export default async function Answers({ searchParams }) {
           <a className="bfx-btn small" href={`/briefings/csv?key=${encodeURIComponent(key)}`}>Baixar planilha (CSV)</a>
         </div>
 
-        {rows.length === 0 ? (
-          <p className="bfx-lead">Nenhuma resposta ainda.</p>
-        ) : (
-          <div className="bfx-table-wrap">
-            <table className="bfx-table bfx-list">
-              <thead>
-                <tr>
-                  <th>Data</th>
-                  <th>Contratante</th>
-                  <th>Marca</th>
-                  <th>O que ele quer</th>
-                  <th>Contato</th>
-                  <th />
-                </tr>
-              </thead>
-              <tbody>
-                {rows.map((r) => (
-                  <tr key={r.id}>
-                    <td>{new Date(r.created_at).toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo", dateStyle: "short", timeStyle: "short" })}</td>
-                    <td><b>{r.name}</b></td>
-                    <td>{r.answers?.projeto ?? "—"}</td>
-                    <td>{r.answers?.precisa ?? "—"}</td>
-                    <td>{r.contact}</td>
-                    <td><a className="bfx-btn small" href={`/briefings/${r.id}?key=${encodeURIComponent(key)}`}>Abrir</a></td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
+        {rows.length === 0
+          ? <p className="bfx-lead">Nenhuma resposta ainda.</p>
+          : <BriefingsList rows={rows} sections={briefingSections} />}
       </div>
     </div>
   );
