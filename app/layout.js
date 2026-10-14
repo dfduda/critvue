@@ -1,4 +1,5 @@
 import "./globals.css";
+import Analytics from "./analytics";
 import { SITE_URL } from "../lib/contact.mjs";
 
 export const metadata = {
@@ -28,7 +29,7 @@ export default function RootLayout({ children }) {
         />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css" />
       </head>
-      <body suppressHydrationWarning>{children}</body>
+      <body suppressHydrationWarning><Analytics />{children}</body>
     </html>
   );
 }

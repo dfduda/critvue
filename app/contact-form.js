@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import posthog from "posthog-js";
 import { WHATSAPP_NUMBER, EMAIL } from "../lib/contact.mjs";
 
 const NOT_SURE = "Ainda não sei";
@@ -22,6 +23,10 @@ export default function ContactForm({ options = [] }) {
     const text = `Oi, Maria Eduarda! Aqui é ${name}.${pacote ? ` Tenho interesse no ${pacote}.` : ""}
 
 ${message}`;
+
+    const lead = { name, pacote, message, via: via === "email" ? "email" : "whatsapp" };
+    posthog.capture?.("lead_submitted", { via: lead.via, pacote: pacote || null });
+    fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(lead), keepalive: true }).catch(() => {});
 
     if (via === "whatsapp") {
       window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, "_blank", "noopener");

@@ -1,7 +1,6 @@
-import { getSql } from "../lib/db";
 import ContactForm from "./contact-form";
 import { projects as projectList } from "../lib/projects.mjs";
-import { packages, included, extras, maintenance, steps, payment, brl } from "../lib/packages.mjs";
+import { packages, included, extras, maintenance, steps, payment, brl, pix, PIX_DISCOUNT } from "../lib/packages.mjs";
 import PickPackage from "./pick-package";
 import MobileMenu from "./mobile-menu";
 import Fold from "./fold";
@@ -34,17 +33,8 @@ const about = [
   { title: "Como trabalho", text: "Começo pelo briefing e mostro tudo no Figma antes de escrever código." },
 ];
 
-const fallbackProjects = projectList.map((p, i) => ({ id: i + 1, ...p }));
-
-async function getProjects() {
-  const sql = getSql();
-  if (!sql) return fallbackProjects;
-  try {
-    return await sql`SELECT id, title, description, url, tags FROM projects ORDER BY created_at DESC`;
-  } catch {
-    return fallbackProjects;
-  }
-}
+// os projetos (com foto) vêm de lib/projects.mjs; o banco guarda só os contatos (leads)
+const allProjects = projectList.map((p, i) => ({ id: i + 1, ...p }));
 
 function Sleeve({ children, className = "" }) {
   return (
@@ -60,7 +50,7 @@ function Sleeve({ children, className = "" }) {
 }
 
 export default async function Home() {
-  const projects = (await getProjects()).filter((p) => SHOW_CONCEPTS || !p.tags?.includes("Conceito"));
+  const projects = allProjects.filter((p) => SHOW_CONCEPTS || !p.tags?.includes("Conceito"));
   const year = new Date().getFullYear();
   const half = projects.length > 4 ? Math.ceil(projects.length / 2) : projects.length;
   const sides = [["A", projects.slice(0, half)], ["B", projects.slice(half)]].filter(([, list]) => list.length);
@@ -179,6 +169,7 @@ export default async function Home() {
                 <div className="t-price">
                   <small>{p.price ? "a partir de" : "valor"}</small>
                   <b>{p.price ? brl(p.price) : "Sob medida"}</b>
+                  {p.price && <em className="pix-price">no Pix {brl(pix(p.price))} · -{PIX_DISCOUNT}%</em>}
                   <span>{p.deadline}</span>
                 </div>
                 <PickPackage name={p.name} className="t-stub">
@@ -192,7 +183,7 @@ export default async function Home() {
             <div className="pl-body">
               <p className="pl-intro">Quer algo a mais ou prefere que eu cuide do site depois? Tá tudo aqui, sem letra miúda.</p>
               <Fold className="pl-fold" summary={<h4><span>[01]</span> Faixa bônus</h4>}>
-                <ul>{extras.map((x) => <li key={x.name}><span>{x.name}<small>{x.detail}</small></span><i /><b>a partir de {brl(x.price)}</b></li>)}</ul>
+                <ul>{extras.map((x) => <li key={x.name}><span>{x.name}<small>{x.detail}</small></span><i /><b>a partir de {brl(x.price)}<small className="pix-note"> · Pix {brl(pix(x.price))}</small></b></li>)}</ul>
               </Fold>
               <Fold className="pl-fold" summary={<h4><span>[02]</span> Plano {maintenance.name} · manutenção</h4>}>
                 <ul>

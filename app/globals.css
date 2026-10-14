@@ -410,3 +410,6 @@ h2.big { margin: 0; max-width: none; font-weight: 800; font-size: clamp(2rem, 6.
 .portrait figcaption span, .ok, .err, .xxx { font-weight: 400; }
 .t-price b, .label b { font-weight: 500; }
 
+
+.pix-price { display: block; font-style: normal; font-size: .72rem; font-weight: 600; margin-top: 6px; padding: 3px 8px; border-radius: 99px; background: rgba(247, 239, 228, .16); }
+.pix-note { font-size: .72em; font-weight: 500; opacity: .75; }
