@@ -413,3 +413,21 @@ h2.big { margin: 0; max-width: none; font-weight: 800; font-size: clamp(2rem, 6.
 
 .pix-price { display: block; font-style: normal; font-size: .72rem; font-weight: 600; margin-top: 6px; padding: 3px 8px; border-radius: 99px; background: rgba(247, 239, 228, .16); }
 .pix-note { font-size: .72em; font-weight: 500; opacity: .75; }
+
+/* briefing */
+.bf-page { padding-top: 48px; padding-bottom: 80px; max-width: 760px; }
+.bf-title { font-family: var(--display); font-size: clamp(1.8rem, 5vw, 2.8rem); margin: 14px 0 12px; color: var(--cream); }
+.bf-intro { color: var(--muted); margin: 0 0 28px; }
+.bf { width: 100%; }
+.bf-sec { border: 0; padding: 0; margin: 0 0 18px; display: grid; gap: 14px; }
+.bf-sec legend { font-family: var(--display); font-weight: 600; color: var(--pink); padding: 0; margin-bottom: 10px; }
+.bf-sec legend span { opacity: .6; margin-right: 6px; }
+.bf-sec label { display: grid; gap: 6px; font-weight: 500; color: var(--cream); }
+.bf-sec label small { color: var(--muted); font-weight: 400; }
+.bf-done { display: grid; gap: 14px; justify-items: start; }
+.bf-big { font-family: var(--display); font-size: 2.4rem; color: var(--pink); margin: 0; }
+.bf-card { background: var(--surface); border-radius: 18px; padding: 22px; margin: 0 0 18px; }
+.bf-card h2 { margin: 0; font-family: var(--display); color: var(--cream); }
+.bf-card h3 { color: var(--pink); margin: 18px 0 6px; font-family: var(--display); font-size: .95rem; }
+.bf-card p { margin: 0 0 10px; }
+.bf-meta { color: var(--muted); }
