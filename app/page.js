@@ -25,9 +25,8 @@ export default async function Home() {
     <main>
       <div className="collar" aria-hidden="true" />
       <header className="hero">
-        <div className="rays" aria-hidden="true" />
         <nav className="topbar mono">
-          <span>FROM OUTER SPACE ✦</span>
+          <span>ONE STAGE · ONE NIGHT ✦</span>
           <div>
             <a href="#sobre">SOBRE</a>
             <a href="#projetos">PROJETOS</a>
@@ -35,14 +34,19 @@ export default async function Home() {
           </div>
         </nav>
         <div className="title">
-          <p className="mono kicker">SEU NOME · DESIGNER DE OUTRO PLANETA · {new Date().getFullYear()}</p>
-          <h1>Port<br />folio</h1>
-          <p className="lead">Cheguei do espaço com muitas ideias e nenhum plano de ir embora. Dá uma olhada nos meus trabalhos.</p>
+          <p className="mono kicker">SEU NOME · DESIGNER DE OUTRO PLANETA</p>
+          <h1>PORT<span>FOLIO</span></h1>
+          <p className="deco">UM PALCO. UMA NOITE. UM PORTFÓLIO.</p>
           <div className="cta">
             <a className="btn" href="#projetos">Ver projetos</a>
             <a className="btn alt" href="#contato">Falar comigo</a>
           </div>
+          <div className="badge" aria-hidden="true"><span className="mono">ABERTO</span><b>{new Date().getFullYear()}</b><span className="mono">ENTRADA LIVRE</span></div>
         </div>
+        <div className="tents" aria-hidden="true">
+          <i className="tent t1" /><i className="tent t2" /><i className="tent t3" />
+        </div>
+        <div className="floor" aria-hidden="true" />
       </header>
 
       <div className="tape" aria-hidden="true">
@@ -80,12 +84,14 @@ export default async function Home() {
           <h2>Alguns<br />trabalhos.</h2>
           <div className="grid">
             {projects.map((p, i) => (
-              <article key={p.id} className="card">
-                <span className="mono">{num(i + 1)}</span>
-                <h3>{p.title}</h3>
-                <p>{p.description}</p>
-                <div className="tags mono">{p.tags?.map((t) => <span key={t} className={t === "Conceito" ? "concept" : ""}>{t}</span>)}</div>
-                {p.url && <a className="mono link" href={p.url} target="_blank" rel="noreferrer">VER PROJETO ↗</a>}
+              <article key={p.id} className="card ticket">
+                <div className="stub mono"><span>ADMIT ONE</span><b>{num(i + 1)}</b></div>
+                <div className="main">
+                  <h3>{p.title}</h3>
+                  <p>{p.description}</p>
+                  <div className="tags mono">{p.tags?.map((t) => <span key={t} className={t === "Conceito" ? "concept" : ""}>{t}</span>)}</div>
+                  {p.url && <a className="mono link" href={p.url} target="_blank" rel="noreferrer">VER PROJETO ↗</a>}
+                </div>
               </article>
             ))}
           </div>
