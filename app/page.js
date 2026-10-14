@@ -23,43 +23,55 @@ export default async function Home() {
   const projects = await getProjects();
   return (
     <main>
+      <div className="collar" aria-hidden="true" />
       <header className="hero">
-        <div className="art">
-          <svg viewBox="0 0 1200 560" preserveAspectRatio="xMidYMin slice" aria-hidden="true">
-            <g strokeLinejoin="round" strokeWidth="10">
-              <path className="s-accent" d="M0 0H360V60H420V120H480V180H420V240H0Z" />
-              <path className="s-lilac" d="M760 240V160H1000V100H1060V40H1120V0H1200V240Z" />
-              <path className="s-cream" d="M0 330H220V390H280V450H220V510H0Z" />
-              <path className="s-cream" d="M320 560V440H380V380H440V320H500V260H560V200H620V260H680V320H740V380H800V440H860V560Z" />
-            </g>
-          </svg>
-          <p className="tl mono">SELECTED<br />WORK</p>
-        </div>
-
-        <div className="foot">
-          <div className="title">
-            <p className="mono">SEU NOME · SUA PROFISSÃO · {new Date().getFullYear()}</p>
-            <h1>PORT<br />FOLIO</h1>
+        <div className="rays" aria-hidden="true" />
+        <nav className="topbar mono">
+          <span>FROM OUTER SPACE ✦</span>
+          <div>
+            <a href="#sobre">SOBRE</a>
+            <a href="#projetos">PROJETOS</a>
+            <a href="#contato">CONTATO</a>
           </div>
-          <div className="side mono">
-            <nav>
-              <a href="#sobre">SOBRE</a>
-              <a href="#projetos">PROJETOS</a>
-              <a href="#contato">CONTATO</a>
-            </nav>
-            <p>ig:@seuinstagram<br />seuemail@email.com</p>
+        </nav>
+        <div className="title">
+          <p className="mono kicker">SEU NOME · DESIGNER DE OUTRO PLANETA · {new Date().getFullYear()}</p>
+          <h1>Port<br />folio</h1>
+          <p className="lead">Cheguei do espaço com muitas ideias e nenhum plano de ir embora. Dá uma olhada nos meus trabalhos.</p>
+          <div className="cta">
+            <a className="btn" href="#projetos">Ver projetos</a>
+            <a className="btn alt" href="#contato">Falar comigo</a>
           </div>
         </div>
       </header>
+
+      <div className="tape" aria-hidden="true">
+        <div>{Array.from({ length: 2 }).map((_, i) => <span key={i}>★ DESIGN FROM OUTER SPACE ★ IDEIAS ★ BRANDING ★ LANDING PAGES ★ DESIGN FROM OUTER SPACE ★ IDEIAS ★ BRANDING ★ LANDING PAGES </span>)}</div>
+      </div>
 
       <div className="wrap">
         <section id="sobre">
           <p className="idx mono">(01)</p>
           <h2>Oi, que bom<br />te ver por aqui.</h2>
-          <div className="boxes">
-            <div className="box"><span className="mono">01</span><p>Escreva aqui quem você é, de onde vem e o que ama fazer.</p></div>
-            <div className="box lit"><span className="mono">02</span><p>Conte o que te move e como você gosta de trabalhar com as pessoas.</p></div>
-            <div className="box"><span className="mono">03</span><p>Diga no que você é boa e que tipo de projeto quer fazer agora.</p></div>
+          <div className="about">
+            <article className="license">
+              <header>PORTFOLIO LICENSE</header>
+              <div className="body">
+                <div className="photo mono">SUA<br />FOTO</div>
+                <div>
+                  <p className="name">Seu Nome</p>
+                  <p className="mono">PROFISSÃO: SUA PROFISSÃO</p>
+                  <p className="mono">NASCEU EM: ONTEM</p>
+                  <p className="sign">Seu Nome</p>
+                </div>
+              </div>
+              <footer className="mono">CERTIFICADA PARA CRIAR</footer>
+            </article>
+            <div className="boxes">
+              <div className="box"><span className="mono">01</span><p>Escreva aqui quem você é, de onde vem e o que ama fazer.</p></div>
+              <div className="box lit"><span className="mono">02</span><p>Conte o que te move e como você gosta de trabalhar com as pessoas.</p></div>
+              <div className="box"><span className="mono">03</span><p>Diga no que você é boa e que tipo de projeto quer fazer agora.</p></div>
+            </div>
           </div>
         </section>
 
@@ -72,7 +84,7 @@ export default async function Home() {
                 <span className="mono">{num(i + 1)}</span>
                 <h3>{p.title}</h3>
                 <p>{p.description}</p>
-                <div className="tags mono">{p.tags?.map((t) => <span key={t}>{t}</span>)}</div>
+                <div className="tags mono">{p.tags?.map((t) => <span key={t} className={t === "Conceito" ? "concept" : ""}>{t}</span>)}</div>
                 {p.url && <a className="mono link" href={p.url} target="_blank" rel="noreferrer">VER PROJETO ↗</a>}
               </article>
             ))}
@@ -86,7 +98,7 @@ export default async function Home() {
           <ContactForm />
         </section>
 
-        <footer className="mono">© {new Date().getFullYear()} SEU NOME</footer>
+        <footer className="mono site-foot">© {new Date().getFullYear()} SEU NOME</footer>
       </div>
     </main>
   );
