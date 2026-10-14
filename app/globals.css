@@ -449,8 +449,9 @@ h2.big { margin: 0; max-width: none; font-weight: 800; font-size: clamp(2rem, 6.
 .bfx-done p { margin: 0; }
 .bfx-foot { margin: 40px 0 0; text-align: center; font-weight: 700; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; }
 .bfx-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
-.bfx-bar h1 { font-family: "Anton", Impact, sans-serif; font-weight: 400; text-transform: uppercase; font-size: 2rem; }
-.bfx-bar h1 span { font-family: inherit; font-size: .9rem; color: #fff; background: #111; padding: 2px 9px; margin-left: 10px; vertical-align: middle; }
+.bfx-bar-title { display: flex; align-items: center; gap: 12px; }
+.bfx-bar h1 { font-family: "Anton", Impact, sans-serif; font-weight: 400; text-transform: uppercase; font-size: 2.2rem; line-height: 1; }
+.bfx-count { background: #111; color: #fff; font-size: .9rem; padding: 3px 10px; }
 .bfx-table-wrap { overflow: auto; max-height: calc(100vh - 140px); border: 1.5px solid #111; }
 .bfx-table { border-collapse: separate; border-spacing: 0; width: max-content; min-width: 100%; font-size: .85rem; }
 .bfx-table th, .bfx-table td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid #E4E4E4; border-right: 1px solid #EEE; min-width: 200px; max-width: 320px; white-space: pre-wrap; background: #fff; }
@@ -461,3 +462,14 @@ h2.big { margin: 0; max-width: none; font-weight: 800; font-size: clamp(2rem, 6.
 .bfx-table thead .stick { z-index: 3; }
 .bfx-table tbody tr:hover td { background: #FAFAFA; }
 @media (max-width: 560px) { .bfx-grid { grid-template-columns: 1fr; } }
+
+.bfx-list th, .bfx-list td { min-width: 0; white-space: normal; }
+.bfx-list td:nth-child(4) { min-width: 260px; }
+.bfx-list th:last-child, .bfx-list td:last-child { width: 1%; white-space: nowrap; }
+.bfx-list td { vertical-align: middle; }
+.bfx-list tbody tr:hover td { background: #F7F7F7; }
+.bfx-back { display: inline-block; margin-bottom: 20px; font-size: .85rem; font-weight: 700; color: #111; text-decoration: underline; }
+.bfx-read span { font-size: .78rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; }
+.bfx-read p { margin: 4px 0 0; white-space: pre-wrap; }
+.bfx-read i { color: #999; }
+.bfx-title { margin-top: 6px; }

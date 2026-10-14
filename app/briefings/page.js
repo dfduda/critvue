@@ -1,5 +1,4 @@
 import { getSql } from "../../lib/db";
-import { briefingSections } from "../../lib/briefing.mjs";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Respostas · Briefing", robots: { index: false, follow: false } };
@@ -17,33 +16,37 @@ export default async function Answers({ searchParams }) {
     <div className="bfx">
       <div className="bfx-wide">
         <div className="bfx-bar">
-          <h1>Respostas dos briefings <span>{rows.length}</span></h1>
+          <div className="bfx-bar-title">
+            <h1>Briefings recebidos</h1>
+            <b className="bfx-count">{rows.length}</b>
+          </div>
           <a className="bfx-btn small" href={`/briefings/csv?key=${encodeURIComponent(key)}`}>Baixar planilha (CSV)</a>
         </div>
+
         {rows.length === 0 ? (
           <p className="bfx-lead">Nenhuma resposta ainda.</p>
         ) : (
           <div className="bfx-table-wrap">
-            <table className="bfx-table">
+            <table className="bfx-table bfx-list">
               <thead>
                 <tr>
-                  <th colSpan={3} className="grp">Cliente</th>
-                  {briefingSections.map((s) => <th key={s.title} colSpan={s.fields.length} className="grp">{s.title}</th>)}
-                </tr>
-                <tr>
-                  <th className="stick">Data</th>
-                  <th>Nome</th>
+                  <th>Data</th>
+                  <th>Contratante</th>
+                  <th>Marca</th>
+                  <th>O que ele quer</th>
                   <th>Contato</th>
-                  {briefingSections.flatMap((s) => s.fields.map((f) => <th key={f.id}>{f.label}</th>))}
+                  <th />
                 </tr>
               </thead>
               <tbody>
                 {rows.map((r) => (
                   <tr key={r.id}>
-                    <td className="stick">{new Date(r.created_at).toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo", dateStyle: "short", timeStyle: "short" })}</td>
+                    <td>{new Date(r.created_at).toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo", dateStyle: "short", timeStyle: "short" })}</td>
                     <td><b>{r.name}</b></td>
+                    <td>{r.answers?.projeto ?? "—"}</td>
+                    <td>{r.answers?.precisa ?? "—"}</td>
                     <td>{r.contact}</td>
-                    {briefingSections.flatMap((s) => s.fields.map((f) => <td key={f.id}>{r.answers?.[f.id] ?? ""}</td>))}
+                    <td><a className="bfx-btn small" href={`/briefings/${r.id}?key=${encodeURIComponent(key)}`}>Abrir</a></td>
                   </tr>
                 ))}
               </tbody>
