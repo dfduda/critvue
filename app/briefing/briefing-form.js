@@ -7,10 +7,12 @@ import { WHATSAPP_NUMBER } from "../../lib/contact.mjs";
 export default function BriefingForm() {
   const [status, setStatus] = useState("idle");
   const [name, setName] = useState("");
+  const [brand, setBrand] = useState("");
 
   async function onSubmit(e) {
     e.preventDefault();
     const { name: n, contact, ...answers } = Object.fromEntries(new FormData(e.currentTarget));
+    setBrand(String(answers.projeto ?? "").trim());
     setStatus("sending");
     try {
       const res = await fetch("/api/briefing", {
@@ -29,13 +31,14 @@ export default function BriefingForm() {
   }
 
   if (status === "done") {
-    const text = `Oi, Maria Eduarda! Aqui é ${name}. Acabei de preencher o briefing.`;
+    const text = `Oi, Maria Eduarda! Aqui é ${name}${brand ? `, da marca ${brand}` : ""}. Acabei de preencher o briefing e estou enviando minhas inspirações:`;
     return (
       <div className="bfx-sec">
         <h2 className="bfx-label">Briefing recebido</h2>
         <div className="bfx-box bfx-done">
           <p>Obrigada, {name}. Vou ler com atenção e retorno com a proposta em breve.</p>
-          <a className="bfx-btn" href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`} target="_blank" rel="noreferrer">Avisar no WhatsApp</a>
+          <p>Tem prints, fotos ou arquivos de inspiração? Envie pelo WhatsApp, já com a mensagem pronta:</p>
+          <a className="bfx-btn" href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`} target="_blank" rel="noreferrer">Enviar inspirações pelo WhatsApp</a>
         </div>
       </div>
     );
