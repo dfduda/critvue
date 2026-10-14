@@ -23,3 +23,11 @@ CREATE TABLE IF NOT EXISTS leads (
   via TEXT NOT NULL,
   created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
+
+CREATE TABLE IF NOT EXISTS briefings (
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  contact TEXT NOT NULL,
+  answers JSONB NOT NULL DEFAULT '{}',
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
