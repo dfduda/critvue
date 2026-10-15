@@ -1,12 +1,8 @@
-import ContactForm from "./contact-form";
 import { projects as projectList } from "../lib/projects.mjs";
-import { packages, included, extras, maintenance, steps, payment, brl, pix, PIX_DISCOUNT } from "../lib/packages.mjs";
-import PickPackage from "./pick-package";
-import MobileMenu from "./mobile-menu";
-import Fold from "./fold";
+import { packages, brl } from "../lib/packages.mjs";
 import Carousel from "./carousel";
-import { EMAIL, WHATSAPP_NUMBER, LINKEDIN } from "../lib/contact.mjs";
-import { SparkleIcon, Waves, Vinyl, OrnateFrame } from "./doodles";
+import { SparkleIcon, Vinyl, OrnateFrame } from "./doodles";
+import { Sleeve, Topbar, ContactSection, Footer } from "./site";
 
 export const revalidate = 3600;
 
@@ -18,7 +14,10 @@ const SHOW_CONCEPTS = true;
 // x/y/w/h posicionam a foto dentro do oval (centralizando o rosto)
 const PHOTO = { src: "/foto.webp", x: -157, y: 36, w: 564, h: 469 };
 
-const navLinks = [["#sobre", "Sobre"], ["#projetos", "Tracklist"], ["#pacotes", "Pacotes"], ["#contato", "Contato"], [LINKEDIN, "LinkedIn"]];
+const navLinks = [["#sobre", "Sobre"], ["#projetos", "Tracklist"], ["/precos", "Preços"], ["#contato", "Contato"]];
+
+// menor preço fixo, pra chamada que leva à página de preços
+const startingPrice = Math.min(...packages.filter((p) => p.price).map((p) => p.price));
 
 const tools = [
   { group: "Design", color: "pink", items: [["Photoshop", "photoshop-plain"], ["Illustrator", "illustrator-plain"], ["Figma", "figma-plain"]] },
@@ -36,19 +35,6 @@ const about = [
 // os projetos (com foto) vêm de lib/projects.mjs; o banco guarda só os contatos (leads)
 const allProjects = projectList.map((p, i) => ({ id: i + 1, ...p }));
 
-function Sleeve({ children, className = "" }) {
-  return (
-    <div className={`sleeve ${className}`}>
-      <div className="sleeve-inner">
-        <Waves />
-        <i className="plus tl" /><i className="plus tr" /><i className="plus bl" /><i className="plus br" />
-        {children}
-        <p className="xxx" aria-hidden="true">✕ ✕ ✕</p>
-      </div>
-    </div>
-  );
-}
-
 export default async function Home() {
   const projects = allProjects.filter((p) => SHOW_CONCEPTS || !p.tags?.includes("Conceito"));
   const year = new Date().getFullYear();
@@ -58,13 +44,7 @@ export default async function Home() {
   return (
     <main>
       <header className="hero">
-        <nav className="topbar">
-          <span className="brand">Maria Eduarda <SparkleIcon className="brand-spark" fill="#F2BFCB" /></span>
-          <div className="links">
-            {navLinks.map(([href, label]) => <a key={href} href={href} {...(href.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}>{label}</a>)}
-          </div>
-          <MobileMenu links={navLinks} />
-        </nav>
+        <Topbar links={navLinks} />
 
         <div className="record">
           <Vinyl labelSrc={LABEL_IMAGE} />
@@ -153,87 +133,15 @@ export default async function Home() {
           </div>
         </section>
 
-        <section id="pacotes">
-          <p className="tag fill idx">Ato III</p>
-          <h2>Pacotes <em>e projetos</em></h2>
-          <div className="tickets">
-            {packages.map((p, i) => (
-              <article key={p.id} className={`ticket-pack ${p.color}${p.featured ? " featured" : ""}`}>
-                <div className="art" aria-hidden="true"><i className="blob" /><i className="disc-mini" /></div>
-                <div className="t-info">
-                  <p className="t-kicker">{p.featured ? "✦ mais pedido" : p.custom ? "✦ edição especial" : `pacote ${String(i + 1).padStart(2, "0")}`}</p>
-                  <h3>{p.name}</h3>
-                  <p className="tagline">{p.tagline}</p>
-                  <Fold summary="o que inclui" className="t-fold"><ul>{p.items.map((it) => <li key={it}>{it}</li>)}</ul></Fold>
-                </div>
-                <div className="t-price">
-                  <small>{p.price ? "a partir de" : "valor"}</small>
-                  <b>{p.price ? brl(p.price) : "Sob medida"}</b>
-                  {p.price && <em className="pix-price">no Pix {brl(pix(p.price))} · -{PIX_DISCOUNT}%</em>}
-                  <span>{p.deadline}</span>
-                </div>
-                <PickPackage name={p.name} className="t-stub">
-                  <span>{p.custom ? "me chama" : "quero esse"}</span><small>admit one</small>
-                </PickPackage>
-              </article>
-            ))}
-          </div>
-
-          <div className="pricelist">
-            <div className="pl-body">
-              <p className="pl-intro">Quer algo a mais ou prefere que eu cuide do site depois? Tá tudo aqui, sem letra miúda.</p>
-              <Fold className="pl-fold" summary={<h4><span>[01]</span> Faixa bônus</h4>}>
-                <ul>{extras.map((x) => <li key={x.name}><span>{x.name}<small>{x.detail}</small></span><i /><b>a partir de {brl(x.price)}<small className="pix-note"> · Pix {brl(pix(x.price))}</small></b></li>)}</ul>
-              </Fold>
-              <Fold className="pl-fold" summary={<h4><span>[02]</span> Plano {maintenance.name} · manutenção</h4>}>
-                <ul>
-                  <li><span>{maintenance.items.join(", ")}</span><i /><b>{brl(maintenance.price)}/mês</b></li>
-                </ul>
-                <PickPackage name={`Plano ${maintenance.name}`} className="pl-pick">quero manutenção →</PickPackage>
-              </Fold>
-              <Fold className="pl-fold" summary={<h4><span>[03]</span> Todo pacote inclui</h4>}>
-                <ul>{included.map((x) => <li key={x}><span>{x}</span><i /><b>incluso</b></li>)}</ul>
-              </Fold>
-              <Fold className="pl-fold" summary={<h4><span>[04]</span> Pagamento</h4>}>
-                <ul>{payment.map((x) => <li key={x.name}><span>{x.name}</span><i /><b>{x.value}</b></li>)}</ul>
-              </Fold>
-            </div>
-            <p className="pl-big" aria-hidden="true">PREÇOS</p>
-          </div>
-
-          <h3 className="steps-title">Como funciona</h3>
-          <ol className="steps">
-            {steps.map((st, i) => (
-              <li key={st.title}><span className="no">{String(i + 1).padStart(2, "0")}</span><b>{st.title}</b><p>{st.text}</p></li>
-            ))}
-          </ol>
+        <section id="precos-cta" className="price-cta">
+          <p>Quer um site, uma marca ou os dois? Tem pacote a partir de <b>{brl(startingPrice)}</b>.</p>
+          <a className="play" href="/precos">ver pacotes e preços →</a>
         </section>
 
-        <section id="contato">
-          <p className="tag fill idx">Ato IV</p>
-          <Sleeve className="thanks">
-            <div className="thanks-copy">
-              <p className="oval">Mal posso esperar sua mensagem</p>
-              <div className="lockup small">
-                <span className="tag t-top">contato</span>
-                <h2 className="big">VAMOS<br />CONVERSAR?</h2>
-                <i className="tri a" /><i className="tri b" />
-              </div>
-              <p className="services">Manda um oi, conta sua ideia. Eu respondo com carinho.</p>
-            </div>
-            <ContactForm options={[
-              ...packages.map((p) => ({ name: p.name, color: p.color, price: p.price ? brl(p.price) : "sob medida" })),
-              { name: `Plano ${maintenance.name}`, color: "oat", price: `${brl(maintenance.price)}/mês` },
-            ]} />
-          </Sleeve>
-        </section>
+        <ContactSection act="III" />
       </div>
 
-      <footer className="site-foot">
-        <p className="xxx">✕ ✕ ✕</p>
-        <p><a href={`mailto:${EMAIL}`}>{EMAIL}</a> · <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer">WhatsApp</a> · <a href={LINKEDIN} target="_blank" rel="noreferrer">LinkedIn</a></p>
-        <p>© {year} Maria Eduarda · branding &amp; front-end</p>
-      </footer>
+      <Footer />
     </main>
   );
 }

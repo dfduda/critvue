@@ -485,3 +485,12 @@ h2.big { margin: 0; max-width: none; font-weight: 800; font-size: clamp(2rem, 6.
 .bfx-close:hover { background: #333; }
 .bfx-modal-body { padding: 22px; display: grid; gap: 22px; }
 .bfx-modal .bfx-label { margin: 0; font-size: .8rem; }
+
+/* página de preços e chamada na home */
+a.brand { color: inherit; text-decoration: none; }
+.hero-slim { padding-bottom: 0; }
+section.first { padding-top: 60px; }
+.price-cta { display: flex; align-items: center; justify-content: space-between; gap: 18px 28px; flex-wrap: wrap; margin-top: 80px; padding: 26px 28px; border: 1.5px solid var(--pink); border-radius: 22px; }
+.price-cta p { margin: 0; font-family: var(--display); font-size: clamp(1rem, 2vw, 1.25rem); max-width: 40ch; }
+.price-cta b { color: var(--pink); }
+.price-cta .play { align-self: center; margin: 0; }
