@@ -5,11 +5,11 @@ import { SITE_URL } from "../lib/contact.mjs";
 export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: "Maria Eduarda · Branding e front-end",
-  description: "Branding, design system e front-end: do guia de marca ao site no ar. Veja projetos, pacotes com preço e peça seu orçamento.",
+  description: "Branding, design system e front-end: do guia de marca ao site no ar. Veja os projetos e peça seu orçamento.",
   alternates: { canonical: "/" },
   openGraph: {
     title: "Maria Eduarda · Branding e front-end",
-    description: "Do guia de marca ao site no ar. Projetos, pacotes com preço e orçamento rápido.",
+    description: "Do guia de marca ao site no ar. Projetos de branding, design system e front-end.",
     type: "website",
     locale: "pt_BR",
     siteName: "Maria Eduarda",
